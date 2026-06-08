@@ -82,6 +82,43 @@ function getPolygonCentroid(coordinates) {
 }
 
 // ==========================================================================
+// Timezone Helpers (GMT-6 Mountain Time)
+// ==========================================================================
+
+function getGMT6Timestamp() {
+  const now = new Date();
+  const offset = -6 * 60; // GMT-6 in minutes
+  const localTime = new Date(now.getTime() + (offset + now.getTimezoneOffset()) * 60 * 1000);
+  
+  const pad = (num) => String(num).padStart(2, '0');
+  const yyyy = localTime.getFullYear();
+  const mm = pad(localTime.getMonth() + 1);
+  const dd = pad(localTime.getDate());
+  const hh = pad(localTime.getHours());
+  const min = pad(localTime.getMinutes());
+  const sec = pad(localTime.getSeconds());
+  
+  return `${yyyy}-${mm}-${dd}T${hh}:${min}:${sec}-06:00`;
+}
+
+function formatGMT6Time(isoString) {
+  try {
+    const d = new Date(isoString);
+    const offset = -6 * 60; // GMT-6 in minutes
+    const gmt6Time = new Date(d.getTime() + (offset + d.getTimezoneOffset()) * 60 * 1000);
+    
+    let hours = gmt6Time.getHours();
+    const minutes = String(gmt6Time.getMinutes()).padStart(2, '0');
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 should be 12
+    return `${hours}:${minutes} ${ampm}`;
+  } catch (e) {
+    return new Date(isoString).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  }
+}
+
+// ==========================================================================
 // Data Processing & Mapping Setup
 // ==========================================================================
 
@@ -793,7 +830,7 @@ function drawAnalyticsCharts() {
       <td>${audit.driverOccupied}</td>
       <td>${signMatchBadge}</td>
       <td>${impedTxt}</td>
-      <td>${new Date(audit.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+      <td>${formatGMT6Time(audit.timestamp)}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -1133,7 +1170,7 @@ document.addEventListener('DOMContentLoaded', () => {
       impededOtherText: otherText,
       notes: notes,
       signMatches: signMatches,
-      timestamp: new Date().toISOString()
+      timestamp: getGMT6Timestamp()
     };
     
     // Save to localStorage
