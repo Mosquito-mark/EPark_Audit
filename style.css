@@ -547,9 +547,13 @@ button {
 .pane-header {
   background-color: var(--coe-blue-dark);
   color: var(--white);
-  padding: 1rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   border-bottom: 2px solid var(--coe-blue-primary);
   flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .pane-header h2 {
@@ -558,10 +562,32 @@ button {
   letter-spacing: 0.5px;
 }
 
+.btn-toggle-map {
+  display: none;
+}
+
 .pane-body {
   padding: 0.75rem; /* Compact padding */
   overflow-y: auto;
   flex-grow: 1;
+}
+
+/* Custom Premium Scrollbar for Form Pane */
+.pane-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.pane-body::-webkit-scrollbar-track {
+  background: var(--coe-bg-light);
+}
+
+.pane-body::-webkit-scrollbar-thumb {
+  background-color: var(--coe-blue-accent);
+  border-radius: 4px;
+}
+
+.pane-body::-webkit-scrollbar-thumb:hover {
+  background-color: var(--coe-blue-primary);
 }
 
 /* Metadata Card */
@@ -1057,12 +1083,44 @@ button {
 }
 
 @media (max-width: 800px) {
+  .btn-toggle-map {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 6px 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: var(--white);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .btn-toggle-map:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+
   .map-pane {
-    height: 300px;
+    height: 100px;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
   .form-pane {
-    height: calc(100% - 300px);
+    height: calc(100% - 100px);
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* When map is hidden via toggle button */
+  .map-layout-wrapper.map-hidden .map-pane {
+    height: 0px !important;
+    overflow: hidden;
+    border: none;
+  }
+  
+  .map-layout-wrapper.map-hidden .form-pane {
+    height: 100% !important;
+    border-top: none;
   }
 }
 

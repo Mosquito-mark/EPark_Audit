@@ -1334,6 +1334,31 @@ document.addEventListener('DOMContentLoaded', () => {
     resetAuditData();
   });
   
+  // Toggle Map Visibility on Mobile Viewport (< 800px)
+  const btnToggleMap = document.getElementById('btn-toggle-map');
+  if (btnToggleMap) {
+    btnToggleMap.addEventListener('click', () => {
+      const wrapper = document.querySelector('.map-layout-wrapper');
+      if (wrapper) {
+        const isHidden = wrapper.classList.toggle('map-hidden');
+        if (isHidden) {
+          btnToggleMap.innerHTML = '<i class="fa-solid fa-eye"></i> Show Map';
+          showToast("Map hidden. Fullscreen form active.");
+        } else {
+          btnToggleMap.innerHTML = '<i class="fa-solid fa-eye-slash"></i> Hide Map';
+          showToast("Map visible.");
+        }
+        
+        // Trigger resize on Leaflet map
+        setTimeout(() => {
+          if (map) {
+            map.invalidateSize();
+          }
+        }, 400);
+      }
+    });
+  }
+  
   // ==========================================================================
   // Navigation Tabs Switcher (Map vs Analytics)
   // ==========================================================================
