@@ -1046,7 +1046,7 @@ button {
   }
 
   .form-columns-wrapper {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.75rem;
   }
   
@@ -1124,7 +1124,12 @@ button {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 600px) {
+  .form-columns-wrapper {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
   .header-container {
     height: auto;
     padding: 0.5rem 0;
