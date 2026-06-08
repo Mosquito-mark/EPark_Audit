@@ -821,6 +821,10 @@ button {
 #analytics-view-container {
   overflow-y: auto;
   padding: 1.5rem;
+  background-color: rgba(243, 244, 245, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 100;
 }
 
 .dashboard-grid {

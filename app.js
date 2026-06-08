@@ -1253,7 +1253,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('tab-map').classList.remove('active');
     document.getElementById('tab-analytics').classList.add('active');
     
-    document.getElementById('map-view-container').classList.remove('active');
     document.getElementById('analytics-view-container').classList.add('active');
     
     // Hide map-specific controls in header and filter bar
