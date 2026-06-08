@@ -1255,8 +1255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     document.getElementById('analytics-view-container').classList.add('active');
     
-    // Hide map-specific controls in header and filter bar
-    document.getElementById('header-base-maps').classList.add('hidden');
+    // Hide map-specific controls in filter bar
     document.getElementById('filter-overlay-toggles').classList.add('hidden');
     
     closeSidebar();
