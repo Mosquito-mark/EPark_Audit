@@ -31,12 +31,27 @@
       
       <!-- Custom Base Map Choices -->
       <div class="header-base-maps" id="header-base-maps">
-        <label for="select-base-map"><i class="fa-solid fa-layer-group"></i> Map Style:</label>
-        <select id="select-base-map" class="coe-header-select">
-          <option value="voyager">Edmonton Streets (Light)</option>
-          <option value="dark">Edmonton Streets (Dark)</option>
-          <option value="satellite">Edmonton Satellite (Imagery)</option>
-        </select>
+        <span class="map-style-label"><i class="fa-solid fa-layer-group"></i> Map Style:</span>
+        <div class="map-style-radios">
+          <label class="map-style-radio-label">
+            <input type="radio" name="base-map" value="voyager" checked>
+            <span class="radio-custom-btn" title="Edmonton Streets (Light)">
+              <i class="fa-solid fa-circle" style="font-size: 0.85rem;"></i>
+            </span>
+          </label>
+          <label class="map-style-radio-label">
+            <input type="radio" name="base-map" value="dark">
+            <span class="radio-custom-btn" title="Edmonton Streets (Dark)">
+              <i class="fa-solid fa-moon"></i>
+            </span>
+          </label>
+          <label class="map-style-radio-label">
+            <input type="radio" name="base-map" value="satellite">
+            <span class="radio-custom-btn" title="Edmonton Satellite (Imagery)">
+              <i class="fa-solid fa-satellite"></i>
+            </span>
+          </label>
+        </div>
       </div>
       
       <nav class="coe-nav-tabs">

@@ -139,13 +139,13 @@ button {
 .header-base-maps {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   font-size: 0.9rem;
   color: var(--white);
   margin-right: 1rem;
 }
 
-.header-base-maps label {
+.map-style-label {
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -153,27 +153,47 @@ button {
   white-space: nowrap;
 }
 
-.coe-header-select {
-  padding: 6px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 0px;
-  background-color: rgba(255, 255, 255, 0.15);
-  color: var(--white);
-  font-family: var(--coe-font);
-  font-size: 0.85rem;
-  font-weight: 600;
-  outline: none;
+.map-style-radios {
+  display: inline-flex;
+  background-color: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 2px;
+}
+
+.map-style-radio-label {
+  position: relative;
   cursor: pointer;
-  transition: background-color 0.2s;
+  display: block;
 }
 
-.coe-header-select:hover {
-  background-color: rgba(255, 255, 255, 0.25);
+.map-style-radio-label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
 }
 
-.coe-header-select option {
-  background-color: var(--coe-blue-primary);
+.radio-custom-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 28px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.map-style-radio-label:hover .radio-custom-btn {
+  background-color: rgba(255, 255, 255, 0.1);
   color: var(--white);
+}
+
+.map-style-radio-label input[type="radio"]:checked + .radio-custom-btn {
+  background-color: var(--coe-blue-accent);
+  color: var(--white);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
 
 /* ==========================================================================

@@ -912,23 +912,25 @@ document.addEventListener('DOMContentLoaded', () => {
   zonesGroup = L.layerGroup().addTo(map);
   accessibleGroup = L.layerGroup();
   
-  // Custom Base Map switching handler from top header dropdown
-  const baseMapSelect = document.getElementById('select-base-map');
-  if (baseMapSelect) {
-    baseMapSelect.addEventListener('change', (e) => {
-      const selectedTheme = e.target.value;
-      
-      // Remove all base tile layers
-      map.removeLayer(tileLayers.voyager);
-      map.removeLayer(tileLayers.dark);
-      map.removeLayer(tileLayers.satellite);
-      
-      // Add the chosen base tile layer
-      if (tileLayers[selectedTheme]) {
-        map.addLayer(tileLayers[selectedTheme]);
+  // Custom Base Map switching handler from top header radio buttons
+  const baseMapRadios = document.querySelectorAll('input[name="base-map"]');
+  baseMapRadios.forEach(radio => {
+    radio.addEventListener('change', (e) => {
+      if (e.target.checked) {
+        const selectedTheme = e.target.value;
+        
+        // Remove all base tile layers
+        map.removeLayer(tileLayers.voyager);
+        map.removeLayer(tileLayers.dark);
+        map.removeLayer(tileLayers.satellite);
+        
+        // Add the chosen base tile layer
+        if (tileLayers[selectedTheme]) {
+          map.addLayer(tileLayers[selectedTheme]);
+        }
       }
     });
-  }
+  });
 
   // Custom Overlay Checkbox Handlers next to search box
   const chkToggleZones = document.getElementById('chk-toggle-zones');
