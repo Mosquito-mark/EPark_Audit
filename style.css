@@ -1,0 +1,1088 @@
+/* ==========================================================================
+   City of Edmonton Digital Brand Styling (Style Guide Alignment)
+   ========================================================================== */
+
+:root {
+  /* Edmonton.ca Brand Palette */
+  --coe-blue-primary: #005087;  /* Pantone 2945 (Primary City Blue) */
+  --coe-blue-dark: #193A5A;     /* Pantone 2955 (Dark Navy Accent) */
+  --coe-blue-accent: #0081BC;   /* Process Blue (Secondary Actions) */
+  --coe-bg-light: #F3F4F5;      /* Light Off-White Page Background */
+  --coe-bg-mid: #D0E0EA;        /* Medium Shade Accent Overlay */
+  --coe-text-dark: #444444;     /* Accessible Text Charcoal Color */
+  --coe-text-muted: #666666;
+  --coe-border: #D0E0EA;
+  --white: #ffffff;
+  
+  /* Audit Status Palette (Original Colors Preserved) */
+  --status-pending: #5c6bc0;     /* Violet-Blue (Pending) */
+  --status-completed: #2e7d32;   /* Emerald Green (Completed) */
+  --status-impeded: #d84315;     /* Orange-Red (Blocked) */
+  
+  /* Font Family Fallbacks */
+  --coe-font: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ==========================================================================
+   Reset & Base Styles
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--coe-font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--coe-text-dark);
+  background-color: var(--coe-bg-light);
+  overflow-x: hidden;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  color: var(--coe-blue-dark);
+}
+
+a {
+  color: var(--coe-blue-accent);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--coe-blue-primary);
+  text-decoration: underline;
+}
+
+button {
+  font-family: var(--coe-font);
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ==========================================================================
+   Header & Navigation
+   ========================================================================== */
+.coe-header {
+  background-color: var(--coe-blue-primary);
+  color: var(--white);
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  z-index: 1000;
+  flex-shrink: 0;
+}
+
+.header-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+}
+
+.brand-title h1 {
+  color: var(--white);
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--coe-bg-mid);
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.coe-nav-tabs {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+}
+
+.nav-tab {
+  background: none;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0 1.5rem;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-bottom: 4px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.nav-tab:hover {
+  color: var(--white);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-tab.active {
+  color: var(--white);
+  border-bottom-color: var(--coe-blue-accent);
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Custom Header Map Switcher */
+.header-base-maps {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--white);
+  margin-right: 1rem;
+}
+
+.header-base-maps label {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.coe-header-select {
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0px;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+  font-family: var(--coe-font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.coe-header-select:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.coe-header-select option {
+  background-color: var(--coe-blue-primary);
+  color: var(--white);
+}
+
+/* ==========================================================================
+   Stats Dashboard
+   ========================================================================== */
+.coe-stats-bar {
+  background-color: var(--coe-blue-dark);
+  color: var(--white);
+  padding: 0.75rem 1.5rem;
+  z-index: 999;
+  flex-shrink: 0;
+  border-bottom: 2px solid var(--coe-blue-primary);
+}
+
+.stats-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: rgba(255, 255, 255, 0.08);
+  padding: 0.5rem 1rem;
+  border-left: 3px solid var(--coe-blue-accent);
+}
+
+.stat-card.progress-card {
+  border-left-color: var(--status-completed);
+}
+
+.stat-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  width: 100%;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--coe-bg-mid);
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.progress-bar-container {
+  width: 100%;
+  height: 6px;
+  background-color: rgba(255, 255, 255, 0.15);
+  margin-top: 0.25rem;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--status-completed);
+  transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   Filter & Control Bar
+   ========================================================================== */
+.coe-filter-bar {
+  background-color: var(--white);
+  border-bottom: 1px solid var(--coe-border);
+  padding: 0.75rem 1.5rem;
+  z-index: 998;
+  flex-shrink: 0;
+}
+
+.filter-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.search-box {
+  position: relative;
+  flex-grow: 1;
+  max-width: 450px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--coe-text-muted);
+}
+
+.search-box input {
+  width: 100%;
+  padding: 8px 12px 8px 36px;
+  border: 1px solid #cccccc;
+  border-radius: 0px; /* Flat Corporate Style */
+  font-family: var(--coe-font);
+  font-size: 0.95rem;
+  color: var(--coe-text-dark);
+}
+
+.search-box input:focus {
+  outline: 2px solid var(--coe-blue-primary);
+}
+
+/* Custom Overlay Toggles in Filter Bar */
+.overlay-toggles {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-grow: 1;
+}
+
+.inline-checkbox {
+  margin-bottom: 0 !important;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--coe-text-dark);
+  white-space: nowrap;
+}
+
+.filter-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Form Controls & Buttons */
+.coe-select {
+  padding: 8px 12px;
+  border: 1px solid #cccccc;
+  border-radius: 0px;
+  background-color: var(--white);
+  font-family: var(--coe-font);
+  font-size: 0.95rem;
+  color: var(--coe-text-dark);
+  min-width: 160px;
+}
+
+.coe-select:focus {
+  outline: 2px solid var(--coe-blue-primary);
+}
+
+.coe-btn {
+  padding: 8px 16px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 0px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background-color: var(--coe-blue-primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--coe-blue-dark);
+}
+
+.btn-secondary {
+  background-color: var(--coe-bg-light);
+  color: var(--coe-text-dark);
+  border: 1px solid #cccccc;
+}
+
+.btn-secondary:hover {
+  background-color: var(--coe-bg-mid);
+}
+
+.text-danger {
+  color: var(--status-impeded) !important;
+}
+
+/* Dropdown Menu Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: var(--white);
+  min-width: 220px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.15);
+  border: 1px solid var(--coe-border);
+  z-index: 1200;
+}
+
+.dropdown-content a {
+  color: var(--coe-text-dark);
+  padding: 10px 16px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.9rem;
+}
+
+.dropdown-content a:hover {
+  background-color: var(--coe-bg-light);
+  color: var(--coe-blue-primary);
+  text-decoration: none;
+}
+
+.dropdown-content hr {
+  border: 0;
+  border-top: 1px solid var(--coe-border);
+  margin: 4px 0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* ==========================================================================
+   Main Area
+   ========================================================================== */
+.coe-main-content {
+  height: 85vh; /* Map & Form fit in exactly 85% of browser height */
+  position: relative;
+  overflow: hidden;
+  background-color: var(--coe-bg-light);
+}
+
+.view-layer {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.view-layer.active {
+  display: block;
+}
+
+/* ==========================================================================
+   Map View Layer
+   ========================================================================== */
+#map-view-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+#map {
+  flex-grow: 1;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Overriding Leaflet Controls to match Edmonton.ca */
+.leaflet-bar {
+  border-radius: 0px !important;
+  border: 1px solid #cccccc !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+}
+
+.leaflet-bar a {
+  border-radius: 0px !important;
+  color: var(--coe-text-dark) !important;
+}
+
+.leaflet-bar a:hover {
+  background-color: var(--coe-bg-mid) !important;
+}
+
+/* GPS Pulse Dot on Map */
+.gps-pulse-icon {
+  background-color: #2196F3;
+  border: 2px solid white;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+  }
+}
+
+/* ==========================================================================
+   Map & Form Stacked Layout (No Sidebar)
+   ========================================================================== */
+.map-layout-wrapper {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.map-pane {
+  width: 50%; /* Map occupies exactly 50% of screen width */
+  height: 85%; /* 85% of container height */
+  position: relative;
+  flex-shrink: 0;
+  overflow: hidden;
+  border: 1px solid var(--coe-border);
+  border-right: none;
+  box-shadow: -10px 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.form-pane {
+  width: 50%; /* Form occupies exactly 50% of screen width */
+  background-color: var(--white);
+  border: 1px solid var(--coe-border);
+  display: flex;
+  flex-direction: column;
+  height: 85%; /* 85% of container height */
+  flex-shrink: 0;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.pane-header {
+  background-color: var(--coe-blue-dark);
+  color: var(--white);
+  padding: 1rem 1.25rem;
+  border-bottom: 2px solid var(--coe-blue-primary);
+  flex-shrink: 0;
+}
+
+.pane-header h2 {
+  color: var(--white);
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.pane-body {
+  padding: 0.75rem; /* Compact padding */
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+/* Metadata Card */
+.zone-details-card {
+  background-color: var(--coe-bg-light);
+  border: 1px solid var(--coe-border);
+  padding: 0.5rem; /* Compact padding */
+  margin-bottom: 0.5rem; /* Compact margin */
+}
+
+.detail-row {
+  display: flex;
+  margin-bottom: 0.2rem; /* Compact margin */
+  font-size: 0.85rem; /* Compact text */
+}
+
+.detail-row:last-child {
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-weight: 700;
+  width: 140px;
+  color: var(--coe-blue-dark);
+}
+
+.detail-value {
+  flex-grow: 1;
+}
+
+.coe-divider {
+  border: 0;
+  border-top: 1px solid var(--coe-border);
+  margin: 0.5rem 0; /* Compact margin */
+}
+
+/* ==========================================================================
+   Form Input Styles
+   ========================================================================== */
+.form-group {
+  margin-bottom: 0.65rem; /* Compact margin */
+}
+
+.form-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.85rem; /* Compact text */
+  margin-bottom: 0.25rem;
+  color: var(--coe-blue-dark);
+}
+
+.coe-input, .coe-textarea {
+  width: 100%;
+  padding: 6px 10px; /* Compact padding */
+  border: 1px solid #cccccc;
+  border-radius: 0px;
+  font-family: var(--coe-font);
+  font-size: 0.9rem;
+}
+
+.coe-input:focus, .coe-textarea:focus {
+  outline: 2px solid var(--coe-blue-primary);
+}
+
+.coe-textarea {
+  resize: vertical;
+}
+
+.input-help {
+  font-size: 0.75rem;
+  color: var(--coe-text-muted);
+  display: block;
+  margin-top: 0.1rem;
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+  padding: 8px; /* Compact padding */
+  font-size: 0.9rem;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 0.75rem; /* Compact margin */
+}
+
+/* Counter Control with Increments (+/- Buttons) */
+.counter-control {
+  display: flex;
+  width: 100%;
+  max-width: 180px; /* Slightly narrower */
+  border: 1px solid #cccccc;
+}
+
+.counter-control button {
+  width: 40px; /* Narrower */
+  height: 32px; /* Shorter */
+  background-color: var(--coe-bg-light);
+  color: var(--coe-text-dark);
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.1s ease;
+}
+
+.counter-control button:hover {
+  background-color: var(--coe-bg-mid);
+}
+
+.counter-control button:active {
+  background-color: #B6D0E2;
+}
+
+.counter-control input {
+  flex-grow: 1;
+  border: none;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  width: 50px;
+  color: var(--coe-blue-dark);
+  height: 32px; /* Match button height */
+  outline: none;
+}
+
+/* Remove default spin buttons */
+.counter-control input::-webkit-outer-spin-button,
+.counter-control input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.counter-control input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Custom Checkboxes */
+.coe-checkbox-container {
+  display: flex;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 0.6rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  user-select: none;
+  align-items: center;
+}
+
+.coe-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkbox-checkmark {
+  position: absolute;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: var(--white);
+  border: 2px solid #999999;
+  border-radius: 0px; /* Flat Box style */
+  transition: all 0.2s ease;
+}
+
+.coe-checkbox-container:hover input ~ .checkbox-checkmark {
+  border-color: var(--coe-blue-primary);
+}
+
+.coe-checkbox-container input:checked ~ .checkbox-checkmark {
+  background-color: var(--coe-blue-primary);
+  border-color: var(--coe-blue-primary);
+}
+
+.checkbox-checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.coe-checkbox-container input:checked ~ .checkbox-checkmark:after {
+  display: block;
+}
+
+.coe-checkbox-container .checkbox-checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.checkbox-label {
+  line-height: 1.3;
+}
+
+.sign-verification-group {
+  background-color: #FFF9C4; /* Warning yellow-tint highlight card */
+  border: 1px solid #FFF59D;
+  padding: 0.75rem 0.85rem;
+  margin: 0.5rem 0 1rem 0;
+}
+
+.sign-verification-group .coe-checkbox-container {
+  margin-bottom: 0;
+  font-weight: 600;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+  width: 100%;
+}
+
+.form-row .col {
+  flex: 1;
+}
+
+/* Custom Form Columns */
+.form-columns-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.form-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 rows, 2 columns */
+  gap: 0.35rem 0.75rem;
+  background-color: var(--coe-bg-light);
+  border: 1px solid var(--coe-border);
+  padding: 0.5rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Analytics Dashboard View
+   ========================================================================== */
+#analytics-view-container {
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.dashboard-card {
+  background-color: var(--white);
+  border: 1px solid var(--coe-border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card.full-width {
+  grid-column: span 2;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--coe-border);
+  background-color: var(--coe-bg-light);
+}
+
+.card-header h3 {
+  font-size: 1.05rem;
+  color: var(--coe-blue-dark);
+}
+
+.card-subtitle {
+  font-size: 0.75rem;
+  color: var(--coe-text-muted);
+}
+
+.card-body {
+  padding: 1.25rem;
+  flex-grow: 1;
+}
+
+.chart-wrapper {
+  min-height: 320px;
+  max-height: 420px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.chart-wrapper canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.no-data-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--coe-text-muted);
+  gap: 0.75rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.no-data-placeholder i {
+  font-size: 3rem;
+  color: var(--coe-bg-mid);
+}
+
+.no-data-placeholder p {
+  font-size: 0.95rem;
+  max-width: 320px;
+}
+
+/* ==========================================================================
+   Table Styles
+   ========================================================================== */
+.table-wrapper {
+  overflow-x: auto;
+  padding: 0;
+}
+
+.coe-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.coe-table th {
+  background-color: var(--coe-blue-dark);
+  color: var(--white);
+  font-weight: 600;
+  padding: 10px 14px;
+}
+
+.coe-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--coe-border);
+}
+
+.coe-table tbody tr:nth-child(even) {
+  background-color: var(--coe-bg-light);
+}
+
+.coe-table tbody tr:hover {
+  background-color: var(--coe-bg-mid);
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  border-radius: 0px;
+  text-transform: uppercase;
+}
+
+.badge-success { background-color: var(--status-completed); }
+.badge-pending { background-color: var(--status-pending); }
+.badge-danger { background-color: var(--status-impeded); }
+.badge-warning { background-color: #f57c00; }
+
+/* ==========================================================================
+   UI Toast Notifications
+   ========================================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 320px;
+}
+
+.coe-toast {
+  background-color: var(--coe-blue-dark);
+  color: var(--white);
+  padding: 12px 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateX(-120%);
+  animation: slideIn 0.3s forwards, fadeOut 0.3s ease-out 3.2s forwards;
+  border-left: 4px solid var(--coe-blue-accent);
+}
+
+.coe-toast.toast-success {
+  border-left-color: var(--status-completed);
+}
+
+.coe-toast.toast-error {
+  border-left-color: var(--status-impeded);
+}
+
+@keyframes slideIn {
+  to { transform: translateX(0); }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+  }
+}
+
+/* ==========================================================================
+   Responsive Viewports / Stacked Layout Overrides
+   ========================================================================== */
+
+
+@media (max-width: 992px) {
+  /* Tablet Vertical Breakpoint (Portrait Tablet & Mobile) */
+  .map-layout-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  .form-columns-wrapper {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .map-pane {
+    height: 40vh; /* Map occupies 40% of viewport height */
+    width: 100%;
+    flex-grow: 0;
+    border: none;
+    box-shadow: none;
+  }
+  
+  .form-pane {
+    width: 100%;
+    height: calc(100% - 40vh); /* Form occupies remaining height */
+    border: none;
+    border-top: 2px solid var(--coe-border);
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .stats-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+  
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .dashboard-card.full-width {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    height: auto;
+    padding: 0.5rem 0;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .coe-nav-tabs {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .nav-tab {
+    padding: 0 1rem;
+    height: 40px;
+    font-size: 0.85rem;
+  }
+  
+  .coe-stats-bar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .coe-filter-bar {
+    padding: 0.5rem 1rem;
+  }
+  
+  .filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  .filter-actions {
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .coe-select {
+    flex-grow: 1;
+    min-width: 100px;
+  }
+  
+  .dropdown {
+    flex-grow: 1;
+  }
+  
+  .dropdown button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
