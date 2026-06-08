@@ -103,6 +103,65 @@ function saveAudits() {
   updateStats();
 }
 
+function syncToGoogleSheets(zoneId, auditData) {
+  const webAppUrl = localStorage.getItem('epark_sheets_url');
+  if (!webAppUrl) return;
+
+  const zoneInfo = processedZones.find(z => z.name === zoneId) || {};
+  
+  // Format impediments
+  let impedTxt = 'None';
+  if (auditData.impeded && auditData.impeded.length > 0) {
+    const parts = [];
+    if (auditData.impeded.includes('construction')) parts.push('Construction');
+    if (auditData.impeded.includes('detour')) parts.push('Detour');
+    if (auditData.impeded.includes('eps')) parts.push('EPS');
+    if (auditData.impeded.includes('city_vehicles')) parts.push('City Vehicles');
+    if (auditData.impeded.includes('other') && auditData.impededOtherText) parts.push(`Other: ${auditData.impededOtherText}`);
+    else if (auditData.impeded.includes('other')) parts.push('Other');
+    impedTxt = parts.join(', ');
+  }
+
+  const payload = {
+    zoneId: zoneId,
+    region: zoneInfo.region || 'None',
+    bia: zoneInfo.bia || 'None',
+    expectedStalls: zoneInfo.stalls || 'N/A',
+    carsParked: auditData.carsParked,
+    driverOccupied: auditData.driverOccupied,
+    signMatches: auditData.signMatches,
+    impediments: impedTxt,
+    notes: auditData.notes,
+    timestamp: auditData.timestamp
+  };
+
+  fetch(webAppUrl, {
+    method: "POST",
+    headers: {
+      "Content-Type": "text/plain"
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
+  .then(result => {
+    if (result.status === "success") {
+      showToast(`Sheets Sync: Zone ${zoneId} uploaded successfully`, "success");
+    } else {
+      console.error("Google Sheets App Script error:", result.message);
+      showToast(`Sheets Sync Error: ${result.message}`, "error");
+    }
+  })
+  .catch(err => {
+    console.error("Google Sheets Sync failed:", err);
+    showToast("Google Sheets sync failed. Saved locally.", "warning");
+  });
+}
+
 /**
  * Pre-processes EPark zones to assign their region and BIA on startup
  */
@@ -1080,6 +1139,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Save to localStorage
     saveAudits();
     
+    // Automatically push to Google Sheets if link configured
+    const sheetsUrl = localStorage.getItem('epark_sheets_url');
+    if (sheetsUrl) {
+      syncToGoogleSheets(zoneName, state.audits[zoneName]);
+    }
+    
     state.formIsDirty = false; // Reset dirty status after successful save
     
     // Update color on map
@@ -1206,6 +1271,25 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('btn-export-json').addEventListener('click', (e) => {
     e.preventDefault();
     exportJSON();
+  });
+  
+  document.getElementById('btn-configure-sheets').addEventListener('click', (e) => {
+    e.preventDefault();
+    const currentUrl = localStorage.getItem('epark_sheets_url') || "";
+    const url = prompt("Paste your Google Apps Script Web App URL to enable automatic sync (or leave empty to disable):", currentUrl);
+    
+    if (url === null) return; // User cancelled
+    
+    const cleanUrl = url.trim();
+    if (cleanUrl === "") {
+      localStorage.removeItem('epark_sheets_url');
+      showToast("Google Sheets integration disabled.", "warning");
+    } else if (cleanUrl.startsWith("https://script.google.com/macros/s/")) {
+      localStorage.setItem('epark_sheets_url', cleanUrl);
+      showToast("Google Sheets integration enabled!", "success");
+    } else {
+      alert("Invalid Web App URL. It must start with 'https://script.google.com/macros/s/'");
+    }
   });
   
   document.getElementById('btn-reset-data').addEventListener('click', (e) => {
