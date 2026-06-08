@@ -1056,6 +1056,16 @@ button {
   }
 }
 
+@media (max-width: 800px) {
+  .map-pane {
+    height: 300px;
+  }
+  
+  .form-pane {
+    height: calc(100% - 300px);
+  }
+}
+
 @media (max-width: 768px) {
   .header-container {
     height: auto;
