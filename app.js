@@ -891,6 +891,16 @@ document.addEventListener('DOMContentLoaded', () => {
   loadAudits();
   updateStats();
   
+  // Load UI scale preference from localStorage
+  const savedScale = localStorage.getItem('epark_ui_scale');
+  if (savedScale) {
+    document.body.style.zoom = savedScale;
+    const scaleSelect = document.getElementById('select-ui-scale');
+    if (scaleSelect) {
+      scaleSelect.value = savedScale;
+    }
+  }
+  
   // 3. Initialize Map centered on Edmonton EPark core
   map = L.map('map', {
     center: [53.5435, -113.488],
@@ -1145,6 +1155,25 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Locate Me button (GPS locator toggle)
   document.getElementById('btn-locate').addEventListener('click', toggleGPS);
+  
+  // UI Scale Selector change handler
+  const scaleSelect = document.getElementById('select-ui-scale');
+  if (scaleSelect) {
+    scaleSelect.addEventListener('change', (e) => {
+      const selectedScale = e.target.value;
+      document.body.style.zoom = selectedScale;
+      localStorage.setItem('epark_ui_scale', selectedScale);
+      
+      // Delay invalidating size slightly to allow browser layout reflow
+      setTimeout(() => {
+        if (map) {
+          map.invalidateSize();
+        }
+      }, 200);
+      
+      showToast(`UI Scale adjusted to ${Math.round(parseFloat(selectedScale) * 100)}%`);
+    });
+  }
   
   // Audio Tracker Toggle (User gesture activation)
   document.getElementById('btn-toggle-audio').addEventListener('click', () => {
