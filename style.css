@@ -104,6 +104,13 @@ button {
   text-transform: uppercase;
 }
 
+.header-right-group {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  height: 100%;
+}
+
 .coe-nav-tabs {
   display: flex;
   height: 100%;

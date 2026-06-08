@@ -29,39 +29,41 @@
         <span class="brand-subtitle">Field Operations Tracker</span>
       </div>
       
-      <!-- Custom Base Map Choices -->
-      <div class="header-base-maps" id="header-base-maps">
-        <span class="map-style-label"><i class="fa-solid fa-layer-group"></i> Map Style:</span>
-        <div class="map-style-radios">
-          <label class="map-style-radio-label">
-            <input type="radio" name="base-map" value="voyager" checked>
-            <span class="radio-custom-btn" title="Edmonton Streets (Light)">
-              <i class="fa-solid fa-circle" style="font-size: 0.85rem;"></i>
-            </span>
-          </label>
-          <label class="map-style-radio-label">
-            <input type="radio" name="base-map" value="dark">
-            <span class="radio-custom-btn" title="Edmonton Streets (Dark)">
-              <i class="fa-solid fa-moon"></i>
-            </span>
-          </label>
-          <label class="map-style-radio-label">
-            <input type="radio" name="base-map" value="satellite">
-            <span class="radio-custom-btn" title="Edmonton Satellite (Imagery)">
-              <i class="fa-solid fa-satellite"></i>
-            </span>
-          </label>
+      <div class="header-right-group">
+        <nav class="coe-nav-tabs">
+          <button id="tab-map" class="nav-tab active">
+            <i class="fa-solid fa-map-location-dot"></i> Map Audit
+          </button>
+          <button id="tab-analytics" class="nav-tab">
+            <i class="fa-solid fa-chart-simple"></i> Analytics Dashboard
+          </button>
+        </nav>
+        
+        <!-- Custom Base Map Choices -->
+        <div class="header-base-maps" id="header-base-maps">
+          <span class="map-style-label"><i class="fa-solid fa-layer-group"></i> Map Style:</span>
+          <div class="map-style-radios">
+            <label class="map-style-radio-label">
+              <input type="radio" name="base-map" value="voyager" checked>
+              <span class="radio-custom-btn" title="Edmonton Streets (Light)">
+                <i class="fa-solid fa-circle" style="font-size: 0.85rem;"></i>
+              </span>
+            </label>
+            <label class="map-style-radio-label">
+              <input type="radio" name="base-map" value="dark">
+              <span class="radio-custom-btn" title="Edmonton Streets (Dark)">
+                <i class="fa-solid fa-moon"></i>
+              </span>
+            </label>
+            <label class="map-style-radio-label">
+              <input type="radio" name="base-map" value="satellite">
+              <span class="radio-custom-btn" title="Edmonton Satellite (Imagery)">
+                <i class="fa-solid fa-satellite"></i>
+              </span>
+            </label>
+          </div>
         </div>
       </div>
-      
-      <nav class="coe-nav-tabs">
-        <button id="tab-map" class="nav-tab active">
-          <i class="fa-solid fa-map-location-dot"></i> Map Audit
-        </button>
-        <button id="tab-analytics" class="nav-tab">
-          <i class="fa-solid fa-chart-simple"></i> Analytics Dashboard
-        </button>
-      </nav>
     </div>
   </header>
 
