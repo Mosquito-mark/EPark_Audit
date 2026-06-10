@@ -1285,12 +1285,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (state.audioEnabled) {
       state.audioEnabled = false;
-      btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> Enable Audio Tracker';
+      btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i> <span class="btn-txt">Enable Audio Tracker</span>';
       btn.className = "coe-btn btn-secondary";
       showToast("Audio Alerts disabled");
     } else {
       state.audioEnabled = true;
-      btn.innerHTML = '<i class="fa-solid fa-volume-high"></i> Audio Tracker Active';
+      btn.innerHTML = '<i class="fa-solid fa-volume-high"></i> <span class="btn-txt">Audio Tracker Active</span>';
       btn.className = "coe-btn btn-primary";
       
       // Play a startup chime to authorize the Web Audio context immediately

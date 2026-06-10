@@ -436,7 +436,8 @@ button {
    Main Area
    ========================================================================== */
 .coe-main-content {
-  height: 85vh; /* Map & Form fit in exactly 85% of browser height */
+  flex: 1;
+  min-height: 0;
   position: relative;
   overflow: hidden;
   background-color: var(--coe-bg-light);
@@ -610,8 +611,9 @@ button {
 
 .detail-label {
   font-weight: 700;
-  width: 140px;
+  width: 120px;
   color: var(--coe-blue-dark);
+  flex-shrink: 0;
 }
 
 .detail-value {
@@ -1036,20 +1038,35 @@ button {
    Responsive Viewports / Stacked Layout Overrides
    ========================================================================== */
 
+/* 1. Desktop Browser (>= 1200px) is handled by default styles */
 
-@media (max-width: 992px) {
-  /* Tablet Vertical Breakpoint (Portrait Tablet & Mobile) */
+/* 2. Tablet Horizontal (992px to 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .map-pane, .form-pane {
+    height: 94%; /* Maximize vertical height to prevent scrollbars */
+  }
+  .pane-body {
+    padding: 0.5rem; /* Reduce padding to prevent scrollbar */
+  }
+  .form-group {
+    margin-bottom: 0.45rem; /* Compact inputs */
+  }
+  .detail-row {
+    margin-bottom: 0.15rem; /* Compact metadata */
+  }
+  .zone-details-card {
+    padding: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+/* 3. Tablet Vertical (768px to 991px) */
+@media (min-width: 768px) and (max-width: 991px) {
   .map-layout-wrapper {
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
   }
-
-  .form-columns-wrapper {
-    flex-direction: row;
-    gap: 0.75rem;
-  }
-  
   .map-pane {
     height: 40vh; /* Map occupies 40% of viewport height */
     width: 100%;
@@ -1057,7 +1074,6 @@ button {
     border: none;
     box-shadow: none;
   }
-  
   .form-pane {
     width: 100%;
     height: calc(100% - 40vh); /* Form occupies remaining height */
@@ -1065,24 +1081,45 @@ button {
     border-top: 2px solid var(--coe-border);
     box-shadow: none;
   }
-}
-
-@media (max-width: 900px) {
-  .stats-container {
-    grid-template-columns: 1fr 1fr;
+  .form-columns-wrapper {
+    flex-direction: row; /* Ensure form columns are side-by-side */
     gap: 0.75rem;
   }
-  
+  .stats-container {
+    grid-template-columns: 1fr 1fr; /* 2x2 grid to save space */
+    gap: 0.75rem;
+  }
   .dashboard-grid {
     grid-template-columns: 1fr;
   }
-  
   .dashboard-card.full-width {
     grid-column: span 1;
   }
 }
 
-@media (max-width: 800px) {
+/* 4. Phone Stacked Layout Base (width < 768px) */
+@media (max-width: 767px) {
+  .map-layout-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+  .map-pane {
+    height: 100px;
+    width: 100%;
+    flex-grow: 0;
+    border: none;
+    box-shadow: none;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .form-pane {
+    width: 100%;
+    height: calc(100% - 100px);
+    border: none;
+    border-top: 2px solid var(--coe-border);
+    box-shadow: none;
+    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
   .btn-toggle-map {
     display: inline-flex;
     align-items: center;
@@ -1096,98 +1133,190 @@ button {
     cursor: pointer;
     transition: background-color 0.2s;
   }
-  
   .btn-toggle-map:hover {
     background-color: rgba(255, 255, 255, 0.25);
   }
-
-  .map-pane {
-    height: 100px;
-    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  .form-pane {
-    height: calc(100% - 100px);
-    transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* When map is hidden via toggle button */
   .map-layout-wrapper.map-hidden .map-pane {
     height: 0px !important;
     overflow: hidden;
     border: none;
   }
-  
   .map-layout-wrapper.map-hidden .form-pane {
     height: 100% !important;
     border-top: none;
   }
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+  .dashboard-card.full-width {
+    grid-column: span 1;
+  }
 }
 
-@media (max-width: 600px) {
+/* 4b. Phone Horizontal / Landscape (width: 480px to 767px AND height < 550px) */
+@media (min-width: 480px) and (max-width: 767px) and (max-height: 550px) {
   .form-columns-wrapper {
-    flex-direction: column;
+    flex-direction: row; /* Side-by-side columns on landscape */
     gap: 0.75rem;
   }
-  
+  .pane-body {
+    padding: 0.5rem;
+  }
+  .form-group {
+    margin-bottom: 0.45rem;
+  }
+  .detail-row {
+    margin-bottom: 0.15rem;
+  }
+  .zone-details-card {
+    padding: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+  /* Compact Header */
+  .coe-header {
+    padding: 0 1rem;
+  }
+  .header-container {
+    height: 45px;
+  }
+  .brand-title h1 {
+    font-size: 1.1rem;
+  }
+  .brand-subtitle {
+    display: none; /* Hide subtitle to save vertical space */
+  }
+  .nav-tab {
+    height: 35px;
+    font-size: 0.85rem;
+    padding: 0 0.75rem;
+  }
+  .header-base-maps {
+    height: 35px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .radio-custom-btn {
+    width: 28px;
+    height: 24px;
+    font-size: 0.85rem;
+  }
+  /* Compact Stats */
+  .coe-stats-bar {
+    padding: 0.25rem 1rem;
+  }
+  .stats-container {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+  }
+  .stat-card {
+    padding: 0.25rem 0.5rem;
+  }
+  .stat-value {
+    font-size: 1rem;
+  }
+  .stat-label {
+    font-size: 0.65rem;
+  }
+  .progress-bar-container {
+    height: 4px;
+    margin-top: 0.1rem;
+  }
+  /* Compact Filter Bar */
+  .coe-filter-bar {
+    padding: 0.25rem 1rem;
+  }
+  .filter-container {
+    gap: 0.5rem;
+  }
+  .search-box input, .coe-select, .coe-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* 5. Phone Vertical / Portrait (< 480px) */
+@media (max-width: 479px) {
+  .form-columns-wrapper {
+    flex-direction: column; /* Stack columns on vertical mobile */
+    gap: 0.75rem;
+  }
+  .btn-txt {
+    display: none; /* Icon-only button layout */
+  }
+  .coe-btn {
+    padding: 8px 10px;
+  }
   .header-container {
     height: auto;
     padding: 0.5rem 0;
     flex-direction: column;
     gap: 0.5rem;
   }
-  
+  .header-right-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    height: auto;
+    width: 100%;
+  }
   .coe-nav-tabs {
     width: 100%;
     justify-content: center;
+    height: auto;
+    align-items: center;
   }
-  
+  .header-base-maps {
+    margin-right: 0;
+    height: auto;
+    padding-bottom: 0.5rem;
+    justify-content: center;
+    width: 100%;
+  }
   .nav-tab {
-    padding: 0 1rem;
+    padding: 0 0.75rem;
     height: 40px;
     font-size: 0.85rem;
   }
-  
   .coe-stats-bar {
     padding: 0.5rem 1rem;
   }
-  
   .stats-container {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr; /* 2x2 grid */
     gap: 0.5rem;
   }
-  
   .coe-filter-bar {
     padding: 0.5rem 1rem;
   }
-  
   .filter-container {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
   }
-  
   .search-box {
     max-width: 100%;
   }
-  
   .filter-actions {
     justify-content: space-between;
     width: 100%;
+    gap: 0.5rem;
   }
-  
   .coe-select {
     flex-grow: 1;
     min-width: 100px;
   }
-  
   .dropdown {
     flex-grow: 1;
   }
-  
   .dropdown button {
     width: 100%;
     justify-content: center;
+  }
+}
+
+/* Stacking stats on extremely narrow portrait phone screens */
+@media (max-width: 360px) {
+  .stats-container {
+    grid-template-columns: 1fr;
   }
 }
 
